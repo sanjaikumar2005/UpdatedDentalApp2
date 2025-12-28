@@ -5,12 +5,20 @@ import torchvision.transforms as transforms
 import numpy as np
 import speech_recognition as sr
 import requests
+import os
 
 # =============================
 # CONFIG
 # =============================
+MODEL_URL = "https://drive.google.com/uc?id=1jFsvVVLK_VBtGiRcHj-Hv0cBOs-FjBCu"
 MODEL_PATH = "model.pt"
+
+if not os.path.exists(MODEL_PATH):
+    with st.spinner("Downloading AI model (one-time)..."):
+        gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
+
 CLASS_NAMES = ["Calculus", "Gingivitis"]
+
 
 HF_API_KEY = "hf_zEEAapJUSQTNPOlWdyBuhYVlDedyjR"
 API_URL = "https://api-inference.huggingface.co/models/microsoft/Phi-3-mini-4k-instruct"
